@@ -1,1 +1,7 @@
 random_local
+rand_client
+rand_client.o
+rand_clnt.o
+rand_server
+rand_server.o
+rand_svc.o
