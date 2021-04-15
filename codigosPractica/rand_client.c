@@ -8,7 +8,7 @@
 
 
 void
-rand_prog_1(char *host)
+rand_prog_1(char *host, long semilla, int iter)
 {
 	CLIENT *clnt;
 	void  *result_1;
@@ -16,6 +16,8 @@ rand_prog_1(char *host)
 	long  *result_2;
 	char *obtiene_siguiente_random_1_arg;
 
+	int i;
+	inicializa_random_1_arg = semilla;
 #ifndef	DEBUG
 	clnt = clnt_create (host, RAND_PROG, RAND_VERS, "udp");
 	if (clnt == NULL) {
@@ -27,11 +29,21 @@ rand_prog_1(char *host)
 	result_1 = inicializa_random_1(&inicializa_random_1_arg, clnt);
 	if (result_1 == (void *) NULL) {
 		clnt_perror (clnt, "call failed");
+	}else{
+		printf("Inizializado de forma exitosa\n");
 	}
-	result_2 = obtiene_siguiente_random_1((void*)&obtiene_siguiente_random_1_arg, clnt);
-	if (result_2 == (long *) NULL) {
-		clnt_perror (clnt, "call failed");
+	printf("estoy entrando al for\n");
+	for (i = 0; i < iter; i++){
+		/* code */
+		result_2 = obtiene_siguiente_random_1((void*)&obtiene_siguiente_random_1_arg, clnt);
+		if (result_2 == (long *) NULL) {
+			clnt_perror (clnt, "call failed");
+		}else{
+			printf("%d : %d\n", i, (int)*result_2);
+		}
 	}
+	
+	
 #ifndef	DEBUG
 	clnt_destroy (clnt);
 #endif	 /* DEBUG */
@@ -42,12 +54,15 @@ int
 main (int argc, char *argv[])
 {
 	char *host;
-
-	if (argc < 2) {
-		printf ("usage: %s server_host\n", argv[0]);
+	int semilla, iteraciones;
+	if (argc < 4) {
+		printf ("usage: %s server_host semilla iteraciones\n", argv[0]);
 		exit (1);
 	}
 	host = argv[1];
-	rand_prog_1 (host);
-exit (0);
+	semilla = 5;
+	iteraciones = 6;
+	printf("semillas %d iteraciones %d\n", (int)*argv[2], (int)*argv[3]);
+	rand_prog_1 (host, semilla, iteraciones);
+	exit (0);
 }
