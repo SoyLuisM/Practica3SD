@@ -32,7 +32,6 @@ rand_prog_1(char *host, long semilla, int iter)
 	}else{
 		printf("Inizializado de forma exitosa\n");
 	}
-	printf("estoy entrando al for\n");
 	for (i = 0; i < iter; i++){
 		/* code */
 		result_2 = obtiene_siguiente_random_1((void*)&obtiene_siguiente_random_1_arg, clnt);
@@ -60,9 +59,11 @@ main (int argc, char *argv[])
 		exit (1);
 	}
 	host = argv[1];
+
 	semilla = 5;
 	iteraciones = 6;
 	printf("semillas %d iteraciones %d\n", (int)*argv[2], (int)*argv[3]);
+	
 	rand_prog_1 (host, semilla, iteraciones);
 	exit (0);
 }
