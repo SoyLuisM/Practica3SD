@@ -14,6 +14,7 @@ suma_1_svc(numeros *argp, struct svc_req *rqstp)
 	/*
 	 * insert server code here
 	 */
+	result = argp->a + argp->b;
 
 	return &result;
 }
@@ -26,6 +27,7 @@ resta_1_svc(numeros *argp, struct svc_req *rqstp)
 	/*
 	 * insert server code here
 	 */
+	result = argp->a - argp->b;
 
 	return &result;
 }
@@ -38,6 +40,7 @@ multiplicacion_1_svc(numeros *argp, struct svc_req *rqstp)
 	/*
 	 * insert server code here
 	 */
+	result = argp->a * argp->b;
 
 	return &result;
 }
@@ -50,6 +53,7 @@ divicion_1_svc(numeros *argp, struct svc_req *rqstp)
 	/*
 	 * insert server code here
 	 */
+	result = argp->a / argp->b;
 
 	return &result;
 }
