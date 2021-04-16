@@ -6,4 +6,9 @@ rand_server
 rand_server.o
 rand_svc.o
 calc_client
+calc_client.o
+calc_clnt.o
 calc_server
+calc_server.o
+calc_svc.o
+calc_xdr.o

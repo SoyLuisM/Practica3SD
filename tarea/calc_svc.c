@@ -20,10 +20,10 @@ static void
 calculadora_1(struct svc_req *rqstp, register SVCXPRT *transp)
 {
 	union {
-		int suma_1_arg;
-		int resta_1_arg;
-		int multiplicacion_1_arg;
-		int divicion_1_arg;
+		numeros suma_1_arg;
+		numeros resta_1_arg;
+		numeros multiplicacion_1_arg;
+		numeros divicion_1_arg;
 	} argument;
 	char *result;
 	xdrproc_t _xdr_argument, _xdr_result;
@@ -35,26 +35,26 @@ calculadora_1(struct svc_req *rqstp, register SVCXPRT *transp)
 		return;
 
 	case SUMA:
-		_xdr_argument = (xdrproc_t) xdr_int;
+		_xdr_argument = (xdrproc_t) xdr_numeros;
 		_xdr_result = (xdrproc_t) xdr_int;
 		local = (char *(*)(char *, struct svc_req *)) suma_1_svc;
 		break;
 
 	case RESTA:
-		_xdr_argument = (xdrproc_t) xdr_int;
+		_xdr_argument = (xdrproc_t) xdr_numeros;
 		_xdr_result = (xdrproc_t) xdr_int;
 		local = (char *(*)(char *, struct svc_req *)) resta_1_svc;
 		break;
 
 	case MULTIPLICACION:
-		_xdr_argument = (xdrproc_t) xdr_int;
+		_xdr_argument = (xdrproc_t) xdr_numeros;
 		_xdr_result = (xdrproc_t) xdr_int;
 		local = (char *(*)(char *, struct svc_req *)) multiplicacion_1_svc;
 		break;
 
 	case DIVICION:
-		_xdr_argument = (xdrproc_t) xdr_int;
-		_xdr_result = (xdrproc_t) xdr_float;
+		_xdr_argument = (xdrproc_t) xdr_numeros;
+		_xdr_result = (xdrproc_t) xdr_int;
 		local = (char *(*)(char *, struct svc_req *)) divicion_1_svc;
 		break;
 

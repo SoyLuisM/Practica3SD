@@ -10,13 +10,13 @@
 static struct timeval TIMEOUT = { 25, 0 };
 
 int *
-suma_1(int *argp, CLIENT *clnt)
+suma_1(numeros *argp, CLIENT *clnt)
 {
 	static int clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
 	if (clnt_call (clnt, SUMA,
-		(xdrproc_t) xdr_int, (caddr_t) argp,
+		(xdrproc_t) xdr_numeros, (caddr_t) argp,
 		(xdrproc_t) xdr_int, (caddr_t) &clnt_res,
 		TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
@@ -25,13 +25,13 @@ suma_1(int *argp, CLIENT *clnt)
 }
 
 int *
-resta_1(int *argp, CLIENT *clnt)
+resta_1(numeros *argp, CLIENT *clnt)
 {
 	static int clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
 	if (clnt_call (clnt, RESTA,
-		(xdrproc_t) xdr_int, (caddr_t) argp,
+		(xdrproc_t) xdr_numeros, (caddr_t) argp,
 		(xdrproc_t) xdr_int, (caddr_t) &clnt_res,
 		TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
@@ -40,13 +40,13 @@ resta_1(int *argp, CLIENT *clnt)
 }
 
 int *
-multiplicacion_1(int *argp, CLIENT *clnt)
+multiplicacion_1(numeros *argp, CLIENT *clnt)
 {
 	static int clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
 	if (clnt_call (clnt, MULTIPLICACION,
-		(xdrproc_t) xdr_int, (caddr_t) argp,
+		(xdrproc_t) xdr_numeros, (caddr_t) argp,
 		(xdrproc_t) xdr_int, (caddr_t) &clnt_res,
 		TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
@@ -54,15 +54,15 @@ multiplicacion_1(int *argp, CLIENT *clnt)
 	return (&clnt_res);
 }
 
-float *
-divicion_1(int *argp, CLIENT *clnt)
+int *
+divicion_1(numeros *argp, CLIENT *clnt)
 {
-	static float clnt_res;
+	static int clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
 	if (clnt_call (clnt, DIVICION,
-		(xdrproc_t) xdr_int, (caddr_t) argp,
-		(xdrproc_t) xdr_float, (caddr_t) &clnt_res,
+		(xdrproc_t) xdr_numeros, (caddr_t) argp,
+		(xdrproc_t) xdr_int, (caddr_t) &clnt_res,
 		TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}

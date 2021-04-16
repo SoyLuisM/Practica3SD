@@ -8,17 +8,19 @@
 
 
 void
-calculadora_1(char *host)
+calculadora_1(char *host, char *operacion, int num1, int num2)
 {
 	CLIENT *clnt;
 	int  *result_1;
-	int  suma_1_arg;
+	numeros  suma_1_arg;
 	int  *result_2;
-	int  resta_1_arg;
+	numeros  resta_1_arg;
 	int  *result_3;
-	int  multiplicacion_1_arg;
-	float  *result_4;
-	int  divicion_1_arg;
+	numeros  multiplicacion_1_arg;
+	int  *result_4;
+	numeros  divicion_1_arg;
+	suma_1_arg.a=num1;
+	suma_1_arg.b=num2;
 
 #ifndef	DEBUG
 	clnt = clnt_create (host, CALCULADORA, OPERACIONES, "udp");
@@ -28,22 +30,49 @@ calculadora_1(char *host)
 	}
 #endif	/* DEBUG */
 
-	result_1 = suma_1(&suma_1_arg, clnt);
-	if (result_1 == (int *) NULL) {
-		clnt_perror (clnt, "call failed");
+	switch (*operacion)
+	{
+	case 'S':
+		result_1 = suma_1(&suma_1_arg, clnt);
+		if (result_1 == (int *) NULL) {
+			clnt_perror (clnt, "call failed");
+		}else{
+			printf("Resultado: %d\n", *result_1);
+		}
+
+		break;
+	case 'R':
+		result_2 = resta_1(&suma_1_arg, clnt);
+		if (result_2 == (int *) NULL) {
+			clnt_perror (clnt, "call failed");
+		}else{
+			printf("Resultado: %d\n", *result_2);
+		}
+
+		break;
+	case 'M':
+		result_3 = multiplicacion_1(&suma_1_arg, clnt);
+		if (result_3 == (int *) NULL) {
+			clnt_perror (clnt, "call failed");
+		}else{
+			printf("Resultado: %d\n", *result_3);
+		}
+
+		break;
+	case 'D':
+		result_4 = divicion_1(&suma_1_arg, clnt);
+		if (result_4 == (int *) NULL) {
+			clnt_perror (clnt, "call failed");
+		}else{
+			printf("Resultado: %d\n", *result_4);
+		}
+
+		break;
+	default:
+		printf("Algo salio mal D:");
+		break;
 	}
-	result_2 = resta_1(&resta_1_arg, clnt);
-	if (result_2 == (int *) NULL) {
-		clnt_perror (clnt, "call failed");
-	}
-	result_3 = multiplicacion_1(&multiplicacion_1_arg, clnt);
-	if (result_3 == (int *) NULL) {
-		clnt_perror (clnt, "call failed");
-	}
-	result_4 = divicion_1(&divicion_1_arg, clnt);
-	if (result_4 == (float *) NULL) {
-		clnt_perror (clnt, "call failed");
-	}
+
 #ifndef	DEBUG
 	clnt_destroy (clnt);
 #endif	 /* DEBUG */
@@ -53,13 +82,18 @@ calculadora_1(char *host)
 int
 main (int argc, char *argv[])
 {
-	char *host;
+	char *host, *operacion;
+	int num1, num2;
 
-	if (argc < 2) {
-		printf ("usage: %s server_host\n", argv[0]);
+	if (argc < 5) {
+		printf ("usage: %s server_host operacion numero1 numero2\n", argv[0]);
 		exit (1);
 	}
 	host = argv[1];
-	calculadora_1 (host);
+	operacion = argv[2];
+	num1 = atoi(argv[3]);
+	num2 = atoi(argv[4]);
+	
+	calculadora_1 (host, operacion, num1, num2);
 exit (0);
 }

@@ -7,49 +7,53 @@
 #include "calc.h"
 
 int *
-suma_1_svc(int *argp, struct svc_req *rqstp)
+suma_1_svc(numeros *argp, struct svc_req *rqstp)
 {
 	static int  result;
 
 	/*
 	 * insert server code here
 	 */
+	result = argp->a + argp->b;
 
 	return &result;
 }
 
 int *
-resta_1_svc(int *argp, struct svc_req *rqstp)
+resta_1_svc(numeros *argp, struct svc_req *rqstp)
 {
 	static int  result;
 
 	/*
 	 * insert server code here
 	 */
+	result = argp->a - argp->b;
 
 	return &result;
 }
 
 int *
-multiplicacion_1_svc(int *argp, struct svc_req *rqstp)
+multiplicacion_1_svc(numeros *argp, struct svc_req *rqstp)
 {
 	static int  result;
 
 	/*
 	 * insert server code here
 	 */
+	result = argp->a * argp->b;
 
 	return &result;
 }
 
-float *
-divicion_1_svc(int *argp, struct svc_req *rqstp)
+int *
+divicion_1_svc(numeros *argp, struct svc_req *rqstp)
 {
-	static float  result;
+	static int  result;
 
 	/*
 	 * insert server code here
 	 */
+	result = argp->a / argp->b;
 
 	return &result;
 }
