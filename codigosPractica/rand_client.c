@@ -60,9 +60,8 @@ main (int argc, char *argv[])
 	}
 	host = argv[1];
 
-	semilla = 5;
-	iteraciones = 6;
-	printf("semillas %d iteraciones %d\n", (int)*argv[2], (int)*argv[3]);
+	semilla =  atoi(argv[2]);
+	iteraciones =  atoi(argv[3]);
 	
 	rand_prog_1 (host, semilla, iteraciones);
 	exit (0);
